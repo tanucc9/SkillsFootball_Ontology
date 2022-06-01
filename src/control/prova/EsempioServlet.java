@@ -1,8 +1,11 @@
 package control.prova;
 
+import model.bean.SoccerPlayerBean;
 import model.dao.ProvaDAO;
+import utils.LoggerSingleton;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -35,7 +38,11 @@ public class EsempioServlet extends HttpServlet {
 		request.setAttribute("x", nomeAttr);
 
 		ProvaDAO pdao = new ProvaDAO();
-		pdao.doProva();
+		ArrayList<SoccerPlayerBean> a = pdao.doProva();
+		LoggerSingleton l = LoggerSingleton.getInstance();
+		for(SoccerPlayerBean socc : a){
+			l.debug(socc.toString());
+		}
 
 		RequestDispatcher dispatcher = request
                 .getRequestDispatcher(response.encodeRedirectURL("./Index.jsp"));

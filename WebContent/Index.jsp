@@ -2,76 +2,122 @@
 	pageEncoding="UTF-8"%>
 	
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  
-  <meta name="description" content="Mobile Application HTML5 Template">
-
-  <meta name="copyright" content="MACode ID, https://www.macodeid.com/">
-
   <title>SkillsFootball Ontology</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
- 
+
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+        crossorigin="anonymous">
+
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+          crossorigin="anonymous"></script>
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-primary">
-  <a class="navbar-brand" href="#">SkillsFootball Ontology</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Skills Football Ontology</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Lista calciatori</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Abilità calciatori</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
+
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
+<p>sssss</p>
 
 <form action="EsempioServlet" method="get">
 	<input type="number" name="nomeAttr" min="0" max="10" value="0">
 	<input type="submit" class="btn btn-primary">
 </form>
 
+
 <!-- Footer -->
 <footer class="text-center text-lg-start bg-light text-muted">
   <!-- Section: Social media -->
   <section
-    class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
+          class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
   >
     <!-- Left -->
     <div class="me-5 d-none d-lg-block">
-      <span>Get connected with us on social networks:</span>
+      <span>Resta connesso con noi!!!</span>
     </div>
     <!-- Left -->
 
@@ -109,11 +155,11 @@
         <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
           <!-- Content -->
           <h6 class="text-uppercase fw-bold mb-4">
-            <i class="fas fa-gem me-3"></i>Company name
+            <i class="fas fa-gem me-3"></i>Il team
           </h6>
           <p>
-            Here you can use rows and columns to organize your footer content. Lorem ipsum
-            dolor sit amet, consectetur adipisicing elit.
+            Siamo due ragazzi iscritti alla magistrale di informatica presso il Dipartimento di Informatica dell'Università degli studi di Salerno.
+            Questo progetto è stato realizzato per il corso di Intelligent Web
           </p>
         </div>
         <!-- Grid column -->
@@ -164,15 +210,12 @@
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
           <!-- Links -->
           <h6 class="text-uppercase fw-bold mb-4">
-            Contact
+            Contatti
           </h6>
-          <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
-          <p>
-            <i class="fas fa-envelope me-3"></i>
-            info@example.com
+          <p><i class="fas fa-home me-3"></i> v.pecoraro14@studenti.unisa.it
           </p>
-          <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
-          <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+          <p><i class="fas fa-home me-3"></i> g.mauro14@studenti.unisa.it
+          </p>
         </div>
         <!-- Grid column -->
       </div>
@@ -183,8 +226,8 @@
 
   <!-- Copyright -->
   <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-    © 2021 Copyright:
-    <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    © 2022 Copyright:
+    <a class="text-reset fw-bold" href="https://github.com/tanucc9/SkillsFootball_Ontology">Skill Football Ontology </a>
   </div>
   <!-- Copyright -->
 </footer>
