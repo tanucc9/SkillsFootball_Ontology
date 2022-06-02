@@ -1,5 +1,8 @@
 package model.bean;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class SoccerPlayerBean {
 
     private String uri;
@@ -8,18 +11,7 @@ public class SoccerPlayerBean {
     private int overall;
     private String position;
     private String thumbnail;
-
-    @Override
-    public String toString() {
-        return "SoccerPlayerBean{" +
-                "uri='" + uri + '\'' +
-                ", name='" + name + '\'' +
-                ", fottballTeamBean=" + fottballTeamBean +
-                ", overall=" + overall +
-                ", position='" + position + '\'' +
-                ", thumbnail='" + thumbnail + '\'' +
-                '}';
-    }
+    private ArrayList<SkillBean> skills;
 
     public String getPosition() {
         return position;
@@ -70,4 +62,24 @@ public class SoccerPlayerBean {
         this.thumbnail = thumbnail;
     }
 
+    @Override
+    public String toString() {
+        return "SoccerPlayerBean{" +
+                "uri='" + uri + '\'' +
+                ", name='" + name + '\'' +
+                ", fottballTeamBean=" + fottballTeamBean +
+                ", overall=" + overall +
+                ", position='" + position + '\'' +
+                ", thumbnail='" + thumbnail + '\'' +
+                ", skills=" + skills +
+                '}';
+    }
+
+    public ArrayList<SkillBean> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(ArrayList<SkillBean> skills) {
+        this.skills = skills;
+    }
 }
