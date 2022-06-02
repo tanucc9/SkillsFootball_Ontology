@@ -1,11 +1,15 @@
 package model.bean;
+
 import java.util.ArrayList;
+
 public class SkillBean {
     private String nome;
     private String tipo;
     private String descrizione;
     private int valSkill;
     private ArrayList<SoccerPlayerBean> players;
+    private String uri;
+
     @Override
     public String toString() {
         return "SkillBean{" +
@@ -14,7 +18,16 @@ public class SkillBean {
                 ", descrizione='" + descrizione + '\'' +
                 ", valSkill=" + valSkill +
                 ", players=" + players +
+                ", uri='" + uri + '\'' +
                 '}';
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 
     public int getValSkill() {
@@ -45,16 +58,16 @@ public class SkillBean {
         return descrizione;
     }
 
+    public void setDescrizione(String descrizione) {
+        descrizione = descrizione;
+    }
+
     public ArrayList<SoccerPlayerBean> getPlayers() {
         return players;
     }
 
     public void setPlayers(ArrayList<SoccerPlayerBean> players) {
         this.players = players;
-    }
-
-    public void setDescrizione(String descrizione) {
-        this.descrizione = descrizione;
     }
 
 }

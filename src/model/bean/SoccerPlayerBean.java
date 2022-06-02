@@ -11,9 +11,10 @@ public class SoccerPlayerBean {
     private int overall;
     private String position;
     private String thumbnail;
-    private HashMap<String, ArrayList<String>> skills;
     private String label_BallonDOr;
     private String comment_BallonDOr;
+    private ArrayList<SkillBean> skills;
+    private String comment;
 
     @Override
     public String toString() {
@@ -24,9 +25,10 @@ public class SoccerPlayerBean {
                 ", overall=" + overall +
                 ", position='" + position + '\'' +
                 ", thumbnail='" + thumbnail + '\'' +
-                ", skills=" + skills +
                 ", label_BallonDOr='" + label_BallonDOr + '\'' +
                 ", comment_BallonDOr='" + comment_BallonDOr + '\'' +
+                ", skills=" + skills +
+                ", comment='" + comment + '\'' +
                 '}';
     }
 
@@ -46,12 +48,12 @@ public class SoccerPlayerBean {
         this.comment_BallonDOr = comment_BallonDOr;
     }
 
-    public HashMap<String, ArrayList<String>> getSkills() {
-        return skills;
+    public String getComment() {
+        return comment;
     }
 
-    public void setSkills(HashMap<String, ArrayList<String>> skills) {
-        this.skills = skills;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public String getPosition() {
@@ -103,4 +105,11 @@ public class SoccerPlayerBean {
         this.thumbnail = thumbnail;
     }
 
+    public ArrayList<SkillBean> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(ArrayList<SkillBean> skills) {
+        this.skills = skills;
+    }
 }
