@@ -22,7 +22,7 @@
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Skills Football Ontology</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,71 +41,14 @@
   </div>
 </nav>
 
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-<p>sssss</p>
-
 <form action="EsempioServlet" method="get">
 	<input type="number" name="nomeAttr" min="0" max="10" value="0">
 	<input type="submit" class="btn btn-primary">
+</form>
+
+<form action="SpecificPlayer" method="get">
+  <input type="number" name="nomeAttr" min="0" max="10" value="0">
+  <input type="submit" class="btn btn-primary">
 </form>
 
 

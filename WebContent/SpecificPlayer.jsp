@@ -39,7 +39,7 @@
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Skills Football Ontology</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,94 +73,123 @@
     <div class="row">
         <div class="col-lg-6">
             <p><b>Squadra attuale:</b> <a href="<%= player.getFottballTeamBean().getUri()%>" target="_blank"><%= player.getFottballTeamBean().getName()%></a></p>
-            <img src="<%=FormatQueryDatas.formatUriThumbnail(player.getFottballTeamBean().getThumbnail()) %>">
         </div>
         <div class="col-lg-6">
             <p><b>Posizione:</b> <%= player.getPosition() %></p>
         </div>
-
+    </div>
+    <h3>Abilità speciali di <%= player.getName() %></h3>
+    <div class="row">
+        <div></div>
+        <div></div>
     </div>
 </div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <div>
+                <canvas id="radarSkills"></canvas>
+            </div>
+            <script>
+                <%  // conversion arrays from java to js
+                    ArrayList<String> skillNames = new ArrayList<String>();
+                    Integer[] skillValues=new Integer[0];
 
-<div class="row">
-    <div class="col-lg-6">
-        <div>
-            <canvas id="radarSkills"></canvas>
-        </div>
-        <script>
-            <%  // conversion arrays from java to js
-                ArrayList<String> skillNames = new ArrayList<String>();
-                Integer[] skillValues=new Integer[0];
-
-                for (SkillBean skill : player.getSkills()) {
-                    skillNames.add(skill.getNome());
-                    List<Integer> list = new ArrayList<>(Arrays.asList(skillValues));
-                    list.add(skill.getValSkill());
-                    skillValues = list.toArray(new Integer[0]);
-                }
-
-                String arrJSLabels = ConverterJavaToJSUtil.getArrayString(skillNames);
-                String arrJSdata = ConverterJavaToJSUtil.getArrayInt(skillValues);
-            %>
-            const data = {
-                labels: <%= arrJSLabels %>,
-                datasets: [{
-                    label: 'Skills  <%= player.getName() %>',
-                    data: <%= arrJSdata %>,
-                    fill: true,
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgb(255, 99, 132)',
-                    pointBackgroundColor: 'rgb(255, 99, 132)',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgb(255, 99, 132)'
-                }]
-            };
-
-            console.log(data);
-
-            const config = {
-                type: 'radar',
-                data: data,
-                options: {
-                    elements: {
-                        line: {
-                            borderWidth: 3
-                        }
+                    for (SkillBean skill : player.getSkills()) {
+                        skillNames.add(skill.getNome());
+                        List<Integer> list = new ArrayList<>(Arrays.asList(skillValues));
+                        list.add(skill.getValSkill());
+                        skillValues = list.toArray(new Integer[0]);
                     }
-                },
-            };
 
-            const myChart = new Chart(
-                document.getElementById('radarSkills'),
-                config
-            );
-        </script>
-    </div>
-    <div class="col-lg-6">
-        <table class="table table-striped table-hover">
-            <tr>
-                <th>Skill</th>
-                <th>Valore</th>
-            </tr>
-            <%
-                for (SkillBean skill : player.getSkills()) {
-            %>
-            <tr>
-                <td><a href="#"><%= skill.getNome() %></a></td>
-                <td><%= skill.getValSkill() %></td>
-            </tr>
-            <%
-                }
-            %>
-        </table>
+                    String arrJSLabels = ConverterJavaToJSUtil.getArrayString(skillNames);
+                    String arrJSdata = ConverterJavaToJSUtil.getArrayInt(skillValues);
+                %>
+                const data = {
+                    labels: <%= arrJSLabels %>,
+                    datasets: [{
+                        label: 'Skills  <%= player.getName() %>',
+                        data: <%= arrJSdata %>,
+                        fill: true,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        pointBackgroundColor: 'rgb(255, 99, 132)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(255, 99, 132)'
+                    }]
+                };
+
+                console.log(data);
+
+                const config = {
+                    type: 'radar',
+                    data: data,
+                    options: {
+                        elements: {
+                            line: {
+                                borderWidth: 3
+                            }
+                        }
+                    },
+                };
+
+                const myChart = new Chart(
+                    document.getElementById('radarSkills'),
+                    config
+                );
+            </script>
+        </div>
+        <div class="col-lg-6">
+            <table class="table table-striped table-hover">
+                <tr>
+                    <th>Skill</th>
+                    <th>Valore</th>
+                </tr>
+                <%
+                    for (SkillBean skill : player.getSkills()) {
+                %>
+                <tr>
+                    <td><a href="#<%=  skill.getUri()%>"><%= skill.getNome() %></a></td>
+                    <td><%= skill.getValSkill() %></td>
+                </tr>
+                <%
+                    }
+                %>
+            </table>
+        </div>
     </div>
 </div>
 
-<form action="EsempioServlet" method="get">
-    <input type="number" name="nomeAttr" min="0" max="10" value="0">
-    <input type="submit" class="btn btn-primary">
-</form>
+<div class="container">
+
+</div>
+
+<div class="container">
+    <h3>Informazioni aggiuntive skill</h3>
+    <table class="table table-striped table-hover">
+        <tr>
+            <th>Skill</th>
+            <th>Tipo</th>
+            <th>Descrizione</th>
+        </tr>
+        <%
+            for (SkillBean skill : player.getSkills()) {
+        %>
+        <tr id="<%= skill.getUri() %>">
+            <td>
+                <%= skill.getNome() %>
+            </td>
+            <td>
+                <%= skill.getTipo() %>
+            </td>
+            <td>
+                <%= skill.getDescrizione() %>
+            </td>
+        </tr>
+        <% } %>
+    </table>
+</div>
 
 
 <!-- Footer -->

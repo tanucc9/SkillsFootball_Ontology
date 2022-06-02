@@ -112,8 +112,6 @@ public class SkillsFootballOntologyDAO {
         qexec.close();
         return result;
     }
-
-
     public ArrayList<SkillBean> doRetrieveSpecialSkillsWithNameAndResourceSoccerPlayer() {
         ArrayList<SkillBean> result = new ArrayList<>();
 
@@ -244,7 +242,7 @@ public class SkillsFootballOntologyDAO {
                 "PREFIX dbp: <http://dbpedia.org/property/>\n" +
                 "PREFIX myonto: <http://www.semanticweb.org/tanucc/ontologies/2022/4/skillsFootball>\n" +
                 "\n" +
-                "SELECT DISTINCT ?name ?position ?currClub ?currClubURI ?currClubThumbnail ?thumbnail ?stats ?name_stat ?stats_individual ?comment\n" +
+                "SELECT DISTINCT ?name ?position ?currClub ?currClubURI ?currClubThumbnail ?thumbnail ?stats ?name_stat ?stats_individual ?comment ?type_stat ?descr_stat \n" +
                 "WHERE {\n" +
                 "  {\n" +
                 "    SERVICE <http://dbpedia.org/sparql> {\n" +
@@ -267,6 +265,8 @@ public class SkillsFootballOntologyDAO {
                 "  \t?player ?p ?stats .\n" +
                 "  \t?p rdfs:seeAlso ?stats_individual.\n" +
                 "  \t?stats_individual myonto:has_name ?name_stat .\n" +
+                "   ?stats_individual myonto:is_type ?type_stat .\n" +
+                "   ?stats_individual myonto:has_description ?descr_stat .\n" +
                 "  \t?player rdfs:seeAlso " + resourcePlayer + " .\n" +
                 "}\n" +
                 "}\n";
@@ -280,6 +280,8 @@ public class SkillsFootballOntologyDAO {
             if (qSolution.getLiteral("name") == null) {
                 SkillBean skill = new SkillBean();
                 skill.setNome(qSolution.getLiteral("name_stat").getString());
+                skill.setTipo(qSolution.getLiteral("type_stat").getString());
+                skill.setDescrizione(qSolution.getLiteral("descr_stat").getString());
                 skill.setValSkill(qSolution.getLiteral("stats").getInt());
                 skill.setUri(qSolution.getResource("stats_individual").getURI());
                 skills.add(skill);

@@ -59,7 +59,7 @@ public class SkillBean {
     }
 
     public void setDescrizione(String descrizione) {
-        descrizione = descrizione;
+        this.descrizione = descrizione;
     }
 
     public ArrayList<SoccerPlayerBean> getPlayers() {
