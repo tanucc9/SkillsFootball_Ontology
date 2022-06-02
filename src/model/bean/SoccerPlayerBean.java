@@ -12,6 +12,29 @@ public class SoccerPlayerBean {
     private String position;
     private String thumbnail;
     private ArrayList<SkillBean> skills;
+    private String comment;
+
+    @Override
+    public String toString() {
+        return "SoccerPlayerBean{" +
+                "uri='" + uri + '\'' +
+                ", name='" + name + '\'' +
+                ", fottballTeamBean=" + fottballTeamBean +
+                ", overall=" + overall +
+                ", position='" + position + '\'' +
+                ", thumbnail='" + thumbnail + '\'' +
+                ", skills=" + skills +
+                ", comment='" + comment + '\'' +
+                '}';
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 
     public String getPosition() {
         return position;
@@ -60,19 +83,6 @@ public class SoccerPlayerBean {
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
-    }
-
-    @Override
-    public String toString() {
-        return "SoccerPlayerBean{" +
-                "uri='" + uri + '\'' +
-                ", name='" + name + '\'' +
-                ", fottballTeamBean=" + fottballTeamBean +
-                ", overall=" + overall +
-                ", position='" + position + '\'' +
-                ", thumbnail='" + thumbnail + '\'' +
-                ", skills=" + skills +
-                '}';
     }
 
     public ArrayList<SkillBean> getSkills() {

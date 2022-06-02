@@ -127,12 +127,13 @@ public class SkillsFootballOntologyDAO {
                 "PREFIX dbp: <http://dbpedia.org/property/>\n" +
                 "PREFIX myonto: <http://www.semanticweb.org/tanucc/ontologies/2022/4/skillsFootball>\n" +
                 "\n" +
-                "SELECT DISTINCT ?name ?position ?currClub ?currClubURI ?currClubThumbnail ?thumbnail ?stats ?name_stat ?stats_individual\n" +
+                "SELECT DISTINCT ?name ?position ?currClub ?currClubURI ?currClubThumbnail ?thumbnail ?stats ?name_stat ?stats_individual ?comment\n" +
                 "WHERE {\n" +
                 "  {\n" +
                 "    SERVICE <http://dbpedia.org/sparql> {\n" +
                 "    " + resourcePlayer + " dbp:name ?name .\n" +
                 "    " + resourcePlayer + " dbp:currentclub ?currClubURI .\n" +
+                "    " + resourcePlayer + "rdfs:comment ?comment ." +
                 "    ?currClubURI rdfs:label ?currClub.\n" +
                 "    ?currClubURI dbo:thumbnail ?currClubThumbnail .\n" +
                 "    " + resourcePlayer + " dbo:thumbnail ?thumbnail .\n" +
@@ -140,6 +141,7 @@ public class SkillsFootballOntologyDAO {
                 "    ?posURI rdfs:label ?position .\n" +
                 "    FILTER(LANG(?currClub) = 'it')\n" +
                 "    FILTER(LANG(?position) = 'it')\n" +
+                "    FILTER(LANG(?comment) = 'it')" +
                 "    }\n" +
                 "}\n" +
                 "  UNION\n" +
@@ -171,6 +173,7 @@ public class SkillsFootballOntologyDAO {
                 team.setUri(qSolution.getResource("currClubURI").getURI());
                 team.setThumbnail(qSolution.getResource("currClubThumbnail").getURI());
                 player.setThumbnail(qSolution.getResource("thumbnail").getURI());
+                player.setComment(qSolution.getLiteral("comment").getString());
                 player.setFottballTeamBean(team);
             }
         }

@@ -38,12 +38,15 @@ public class EsempioServlet extends HttpServlet {
 		request.setAttribute("x", nomeAttr);
 
 		SkillsFootballOntologyDAO pdao = new SkillsFootballOntologyDAO();
-		SoccerPlayerBean a = pdao.doSpecificPlayer("<http://dbpedia.org/resource/Ángel_Correa>");
+		SoccerPlayerBean player = pdao.doSpecificPlayer("<http://dbpedia.org/resource/Ángel_Correa>");
+
 		LoggerSingleton l = LoggerSingleton.getInstance();
-		l.debug(a.toString());
+		l.debug(player.toString());
+
+		request.setAttribute("player", player);
 
 		RequestDispatcher dispatcher = request
-                .getRequestDispatcher(response.encodeRedirectURL("./Index.jsp"));
+                .getRequestDispatcher(response.encodeRedirectURL("./SpecificPlayer.jsp"));
       dispatcher.forward(request, response);
 	}
 
