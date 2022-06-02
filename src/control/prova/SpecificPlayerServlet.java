@@ -40,11 +40,13 @@ public class SpecificPlayerServlet extends HttpServlet {
 
         SkillsFootballOntologyDAO sDao = new SkillsFootballOntologyDAO();
         SoccerPlayerBean player = sDao.doSpecificPlayer(uriPlayer);
+        ArrayList<SkillBean> skills = sDao.doSpecialSkillPlayer(uriPlayer);
 
         LoggerSingleton l = LoggerSingleton.getInstance();
         l.debug(player.toString());
 
         request.setAttribute("player", player);
+        request.setAttribute("skills", skills);
         RequestDispatcher dispatcher = request
                 .getRequestDispatcher(response.encodeRedirectURL("./SpecificPlayer.jsp"));
         dispatcher.forward(request, response);

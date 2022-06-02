@@ -10,7 +10,8 @@
 <%@ page import="utils.FormatQueryDatas" %>
 
 <% SoccerPlayerBean player = (SoccerPlayerBean) request.getAttribute("player");
-    if (player == null) {
+    ArrayList<SkillBean> skills = (ArrayList<SkillBean>) request.getAttribute("skills");
+    if (player == null || skills == null) {
         response.sendRedirect("./Index.jsp");
         return;
     }%>
@@ -78,10 +79,17 @@
             <p><b>Posizione:</b> <%= player.getPosition() %></p>
         </div>
     </div>
-    <h3>Abilità speciali di <%= player.getName() %></h3>
+    <h3 class="margin-25">Abilità speciali di <%= player.getName() %></h3>
     <div class="row">
-        <div></div>
-        <div></div>
+        <%
+        for(SkillBean skill : skills) {
+            %>
+        <div class="col-lg-6">
+            <p><b><%= skill.getNome() %></b>: <%= skill.getDescrizione() %></p>
+        </div>
+        <%
+        }
+        %>
     </div>
 </div>
 <div class="container">

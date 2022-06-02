@@ -302,4 +302,52 @@ public class SkillsFootballOntologyDAO {
 
         return player;
     }
+
+    public ArrayList<SkillBean> doSpecialSkillPlayer(String resourcePlayer) {
+
+        SoccerPlayerBean player = new SoccerPlayerBean();
+        FootBallTeamBean team = new FootBallTeamBean();
+        ArrayList<SkillBean> skills = new ArrayList<SkillBean>();
+
+        String q = "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n" +
+                "PREFIX db: <http://dbpedia.org/>\n" +
+                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" +
+                "PREFIX dbo: <http://dbpedia.org/ontology/>\n" +
+                "PREFIX dbp: <http://dbpedia.org/property/>\n" +
+                "PREFIX myonto: <http://www.semanticweb.org/tanucc/ontologies/2022/4/skillsFootball>\n" +
+                "\n" +
+                "SELECT DISTINCT ?player (GROUP_CONCAT(?special_skill;SEPARATOR=\",\") AS ?special_skills) (GROUP_CONCAT(?special_skill_descr;SEPARATOR=\"§\") AS ?special_skills_descr)\n" +
+                "WHERE {\n" +
+                "  ?player a dbo:SoccerPlayer .\n" +
+                "  ?player rdfs:seeAlso " + resourcePlayer + ".\n" +
+                "  ?player myonto:has_special_skill ?special_skillURI .\n" +
+                "  ?special_skillURI myonto:has_name ?special_skill .\n" +
+                "  ?special_skillURI myonto:has_description ?special_skill_descr .\n" +
+                "}\n" +
+                "GROUP BY ?player";
+
+        Query query = QueryFactory.create(q);
+
+        QueryExecution qexec = QueryExecutionFactory.sparqlService(endpoint, query);
+        ResultSet results = qexec.execSelect();
+        while (results.hasNext()) {
+            QuerySolution qSolution = results.nextSolution();
+
+
+            String skillNames = qSolution.getLiteral("special_skills").getString();
+            String skillDescrs = qSolution.getLiteral("special_skills_descr").getString();
+
+            String[] splittedSkillNames = skillNames.split(",");
+            String[] splittedSkillDescrs = skillDescrs.split("§");
+            for (int i = 0; splittedSkillNames.length > i; i++) {
+                SkillBean skill = new SkillBean();
+                skill.setNome(splittedSkillNames[i]);
+                skill.setDescrizione(splittedSkillDescrs[i]);
+                skills.add(skill);
+            }
+        }
+        qexec.close();
+
+        return skills;
+    }
 }
