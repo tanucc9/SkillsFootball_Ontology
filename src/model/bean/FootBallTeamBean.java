@@ -3,6 +3,8 @@ package model.bean;
 public class FootBallTeamBean {
     private String uri;
     private String name;
+    private String thumbnail;
+
 
     public String getName() {
         return name;
@@ -12,7 +14,7 @@ public class FootBallTeamBean {
         this.name = name;
     }
 
-    private String thumbnail;
+
 
     public String getUri() {
         return uri;

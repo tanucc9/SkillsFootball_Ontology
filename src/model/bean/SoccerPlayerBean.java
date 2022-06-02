@@ -7,6 +7,7 @@ public class SoccerPlayerBean {
     private FootBallTeamBean fottballTeamBean;
     private int overall;
     private String position;
+    private String thumbnail;
 
     @Override
     public String toString() {
@@ -28,9 +29,7 @@ public class SoccerPlayerBean {
         String[] splittedString = position.split("\\(");
         this.position = splittedString[0];
     }
-
-    private String thumbnail;
-
+    
     public String getUri() {
         return uri;
     }

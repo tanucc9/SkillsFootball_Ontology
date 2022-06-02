@@ -1,7 +1,7 @@
 package control.prova;
 
 import model.bean.SoccerPlayerBean;
-import model.dao.ProvaDAO;
+import model.dao.SkillsFootballOntologyDAO;
 import utils.LoggerSingleton;
 
 import java.io.IOException;
@@ -37,7 +37,7 @@ public class EsempioServlet extends HttpServlet {
 		String nomeAttr = request.getParameter("nomeAttr");
 		request.setAttribute("x", nomeAttr);
 
-		ProvaDAO pdao = new ProvaDAO();
+		SkillsFootballOntologyDAO pdao = new SkillsFootballOntologyDAO();
 		ArrayList<SoccerPlayerBean> a = pdao.doProva();
 		LoggerSingleton l = LoggerSingleton.getInstance();
 		for(SoccerPlayerBean socc : a){
