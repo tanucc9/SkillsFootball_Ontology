@@ -1,5 +1,8 @@
 package model.bean;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class SoccerPlayerBean {
 
     private String uri;
@@ -8,6 +11,9 @@ public class SoccerPlayerBean {
     private int overall;
     private String position;
     private String thumbnail;
+    private HashMap<String, ArrayList<String>> skills;
+    private String label_BallonDOr;
+    private String comment_BallonDOr;
 
     @Override
     public String toString() {
@@ -18,7 +24,34 @@ public class SoccerPlayerBean {
                 ", overall=" + overall +
                 ", position='" + position + '\'' +
                 ", thumbnail='" + thumbnail + '\'' +
+                ", skills=" + skills +
+                ", label_BallonDOr='" + label_BallonDOr + '\'' +
+                ", comment_BallonDOr='" + comment_BallonDOr + '\'' +
                 '}';
+    }
+
+    public String getLabel_BallonDOr() {
+        return label_BallonDOr;
+    }
+
+    public void setLabel_BallonDOr(String label_BallonDOr) {
+        this.label_BallonDOr = label_BallonDOr;
+    }
+
+    public String getComment_BallonDOr() {
+        return comment_BallonDOr;
+    }
+
+    public void setComment_BallonDOr(String comment_BallonDOr) {
+        this.comment_BallonDOr = comment_BallonDOr;
+    }
+
+    public HashMap<String, ArrayList<String>> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(HashMap<String, ArrayList<String>> skills) {
+        this.skills = skills;
     }
 
     public String getPosition() {
@@ -29,7 +62,7 @@ public class SoccerPlayerBean {
         String[] splittedString = position.split("\\(");
         this.position = splittedString[0];
     }
-    
+
     public String getUri() {
         return uri;
     }

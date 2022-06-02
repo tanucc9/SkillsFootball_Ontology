@@ -1,5 +1,7 @@
 package control.prova;
 
+import model.bean.FootBallTeamBean;
+import model.bean.SkillBean;
 import model.bean.SoccerPlayerBean;
 import model.dao.SkillsFootballOntologyDAO;
 import utils.LoggerSingleton;
@@ -38,10 +40,14 @@ public class EsempioServlet extends HttpServlet {
 		request.setAttribute("x", nomeAttr);
 
 		SkillsFootballOntologyDAO pdao = new SkillsFootballOntologyDAO();
-		ArrayList<SoccerPlayerBean> a = pdao.doProva();
+		ArrayList<SoccerPlayerBean> a = pdao.doRetrieveBest30SoccerPlayerInTheWorld();
 		LoggerSingleton l = LoggerSingleton.getInstance();
-		for(SoccerPlayerBean socc : a){
-			l.debug(socc.toString());
+
+		for(SoccerPlayerBean sp : pdao.doRetrieveBallonDOr())
+		{
+			l.debug("NOME ===>"+ sp.getName());
+			l.debug("CLUB ===>" + sp.getFottballTeamBean().getName());
+			l.debug("OVERALL ===>"+ sp.getOverall());
 		}
 
 		RequestDispatcher dispatcher = request
