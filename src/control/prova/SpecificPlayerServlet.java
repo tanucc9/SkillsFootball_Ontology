@@ -36,7 +36,7 @@ public class SpecificPlayerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         //@todo edit mock uriPlayer
-        String uriPlayer = "<http://dbpedia.org/resource/Ángel_Correa>";
+        String uriPlayer = "<"+request.getParameter("player")+">";
 
         SkillsFootballOntologyDAO sDao = new SkillsFootballOntologyDAO();
         SoccerPlayerBean player = sDao.doSpecificPlayer(uriPlayer);
