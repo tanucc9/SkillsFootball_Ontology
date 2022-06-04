@@ -104,20 +104,22 @@
   for (SoccerPlayerBean sp : dao.doRetrieveBest30SoccerPlayerInTheWorld())
   {%>
 <div class="column">
-<div class="card" style="width: 15rem; height: 40rem; margin: 5rem;">
+<div class="card" style="width: 15rem; height: 50rem; margin: 5rem;">
   <img class="card-img-top" src="<%=sp.getThumbnail()%>" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title"><%=sp.getName()%></h5>
     <p class="card-text"><%=sp.getFottballTeamBean().getName()%></p>
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item"><%=sp.getOverall()%></li>
-    <li class="list-group-item"><%=sp.getPosition()%></li>
+    <li class="list-group-item">Overall : <%=sp.getOverall()%></li>
+    <li class="list-group-item">Ruolo : <%=sp.getPosition()%></li>
 
   </ul>
   <div class="card-body">
     <p><a href="SpecificPlayer?player=<%=sp.getUri()%>" class="card-link">Caratteristiche Giocatore</a></p>
-    <p><a href="#" class="card-link">Another link</a></p>
+    <%if(sp.getOverall()>91){%><p style="color: darkgoldenrod">Questo giocatore ha vinto almeno un pallone d'ora</p>
+    <p><a href="ServletBallonDOR" class="card-link">Clicca qui per maggiori informazioni su questo riconoscimento!!</a></p>
+    <%}%>
   </div>
 </div>
 </div>
