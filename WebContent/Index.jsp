@@ -1,9 +1,64 @@
+<%@ page import="model.bean.SoccerPlayerBean" %>
+<%@ page import="model.dao.SkillsFootballOntologyDAO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
 	
 <!DOCTYPE html>
 <html lang="it">
 <head>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* Float four columns side by side */
+    .column {
+      float: left;
+      width: 25%;
+      padding: 0 10px;
+    }
+
+    /* Remove extra left and right margins, due to padding in columns */
+    .row {margin: 0 -5px;}
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    /* Style the counter cards */
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+      padding: 16px;
+      text-align: center;
+      background-color: #f1f1f1;
+    }
+    .fullscreen {
+      position: fixed;
+      top: 8%;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      overflow: auto;
+      background: #055db8; /* Just to visualize the extent */
+
+    }
+
+    /* Responsive columns - one column layout (vertical) on small screens */
+    @media screen and (max-width: 600px) {
+      .column {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+      }
+    }
+  </style>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -41,16 +96,33 @@
   </div>
 </nav>
 
-<form action="EsempioServlet" method="get">
-	<input type="number" name="nomeAttr" min="0" max="10" value="0">
-	<input type="submit" class="btn btn-primary">
-</form>
+<div class="fullscreen" class="row">
+<%
+  SkillsFootballOntologyDAO dao = new SkillsFootballOntologyDAO();
+  int i = 0;
 
-<form action="SpecificPlayer" method="get">
-  <input type="number" name="nomeAttr" min="0" max="10" value="0">
-  <input type="submit" class="btn btn-primary">
-</form>
+  for (SoccerPlayerBean sp : dao.doRetrieveBest30SoccerPlayerInTheWorld())
+  {%>
+<div class="column">
+<div class="card" style="width: 15rem; height: 40rem; margin: 5rem;">
+  <img class="card-img-top" src="<%=sp.getThumbnail()%>" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title"><%=sp.getName()%></h5>
+    <p class="card-text"><%=sp.getFottballTeamBean().getName()%></p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><%=sp.getOverall()%></li>
+    <li class="list-group-item"><%=sp.getPosition()%></li>
 
+  </ul>
+  <div class="card-body">
+    <p><a href="SpecificPlayer?player=<%=sp.getUri()%>" class="card-link">Caratteristiche Giocatore</a></p>
+    <p><a href="#" class="card-link">Another link</a></p>
+  </div>
+</div>
+</div>
+<%}%>
+</div>
 
 <!-- Footer -->
 <footer class="text-center text-lg-start bg-light text-muted">
