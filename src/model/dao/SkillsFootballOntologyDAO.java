@@ -12,7 +12,7 @@ public class SkillsFootballOntologyDAO {
     private final String endpoint = "http://localhost:3030/SkillsFootball/query";
 
 
-    public ArrayList<SoccerPlayerBean> doRetrieveBest30SoccerPlayerInTheWorld() {
+    public ArrayList<SoccerPlayerBean>  doRetrieveBest30SoccerPlayerInTheWorld() {
         ArrayList<SoccerPlayerBean> players = new ArrayList<>();
 
         String q = "PREFIX db: <http://dbpedia.org/>\n" +
