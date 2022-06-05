@@ -1,5 +1,6 @@
 <%@ page import="model.bean.SoccerPlayerBean" %>
 <%@ page import="model.dao.SkillsFootballOntologyDAO" %>
+<%@ page import="model.bean.FootBallTeamBean" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 	
@@ -123,7 +124,29 @@
   </div>
 </div>
 </div>
-<%}%>
+<%}%><br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br>
+  <div  style="margin-top: 100px;">
+    <p><h2>Squadre di calcio con la media dell'overall totale, il giocatore più forte e quello meno forte</h2></p>
+    <%
+
+
+      for (FootBallTeamBean sp : dao.doRetrieveStatsFootballTeamWithMaxAvgAndMinimunOverall())
+      {%>
+    <div class="column">
+      <div class="card" style="width: 15rem; height: 30rem; margin: 5rem;">
+        <img class="card-img-top" src="<%=sp.getThumbnail()%>" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title"><%=sp.getName()%></h5>
+          <p class="card-text">Avg : <%=sp.getAvg_overall()%></p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"> max Overall : <%=sp.getMax_overall()%></li>
+          <li class="list-group-item">min overall  : <%=sp.getMin_overall()%></li>
+        </ul>
+      </div>
+    </div>
+    <%}%>
+  </div>
 </div>
 
 <!-- Footer -->

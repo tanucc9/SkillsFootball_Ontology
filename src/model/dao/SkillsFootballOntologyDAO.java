@@ -78,18 +78,19 @@ public class SkillsFootballOntologyDAO {
                 "PREFIX dbp: <http://dbpedia.org/property/>\n" +
                 "PREFIX myonto: <http://www.semanticweb.org/tanucc/ontologies/2022/4/skillsFootball>\n" +
                 "\n" +
-                "SELECT DISTINCT ?currClubURI ?currClubThumbnail (CEIL(AVG(?overall)) AS ?avg_overall) (MIN(?overall) AS ?min_overall) (MAX(?overall) AS ?max_overall) \n" +
+                "SELECT DISTINCT ?currClubURI ?clubn ?currClubThumbnail (CEIL(AVG(?overall)) AS ?avg_overall) (MIN(?overall) AS ?min_overall) (MAX(?overall) AS ?max_overall) \n" +
                 "WHERE {\n" +
                 "      SERVICE <http://dbpedia.org/sparql> {\n" +
                 "    ?individual a dbo:SoccerPlayer .\n" +
                 "    ?individual dbp:currentclub ?currClubURI .\n" +
                 "    ?currClubURI dbo:thumbnail ?currClubThumbnail .\n" +
+                "    ?currClubURI dbp:clubname ?clubn.\n" +
                 "  }\n" +
                 "    ?player a dbo:SoccerPlayer .\n" +
                 "  \t?player myonto:has_overall ?overall .\n" +
                 "  \t?player rdfs:seeAlso ?individual .\n" +
                 "}\n" +
-                "GROUP BY ?currClubURI ?currClubThumbnail\n" +
+                "GROUP BY ?currClubURI ?currClubThumbnail ?clubn\n" +
                 "HAVING (MAX(?overall) != MIN(?overall))\n" +
                 "ORDER BY DESC(?avg_overall)\n" +
                 "LIMIT 30\n";
@@ -103,6 +104,7 @@ public class SkillsFootballOntologyDAO {
             FootBallTeamBean iTeam = new FootBallTeamBean();
             QuerySolution qSolution = results.nextSolution();
             iTeam.setUri(qSolution.getResource("currClubURI").getURI());
+            iTeam.setName(qSolution.getLiteral("clubn").getString());
             iTeam.setThumbnail(qSolution.getResource("currClubThumbnail").getURI());
             iTeam.setAvg_overall(qSolution.getLiteral("avg_overall").getInt());
             iTeam.setMax_overall(qSolution.getLiteral("max_overall").getInt());
