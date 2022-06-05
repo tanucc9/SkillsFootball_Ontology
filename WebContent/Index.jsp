@@ -19,7 +19,7 @@
     /* Float four columns side by side */
     .column {
       float: left;
-      width: 25%;
+      width: 33%;
       padding: 0 10px;
     }
 
@@ -125,15 +125,15 @@
 </div>
 </div>
 <%}%><br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br>
-  <div  style="margin-top: 100px;">
-    <p><h2>Squadre di calcio con la media dell'overall totale, il giocatore più forte e quello meno forte</h2></p>
+  <div  style="margin-top: 50%;">
+    <p><h2 style="color: #f1f1f1">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSquadre di calcio con la media dell'overall totale, il giocatore più forte e quello meno forte</h2></p>
     <%
 
 
       for (FootBallTeamBean sp : dao.doRetrieveStatsFootballTeamWithMaxAvgAndMinimunOverall())
       {%>
     <div class="column">
-      <div class="card" style="width: 15rem; height: 30rem; margin: 5rem;">
+      <div class="card" style="width: 15rem; height: 40rem; margin: 5rem;">
         <img class="card-img-top" src="<%=sp.getThumbnail()%>" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title"><%=sp.getName()%></h5>
