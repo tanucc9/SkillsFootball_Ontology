@@ -1,6 +1,9 @@
 <%@ page import="model.bean.SoccerPlayerBean" %>
 <%@ page import="model.dao.SkillsFootballOntologyDAO" %>
 <%@ page import="model.bean.FootBallTeamBean" %>
+<%@ page import="model.bean.SkillBean" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="utils.LoggerSingleton" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 	
@@ -147,6 +150,50 @@
     </div>
     <%}%>
   </div>
+  <div  style="margin-top: 50%;">
+    <p><h2 style="color: #f1f1f1">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspEcco un elenco di tutte le skill speciali del gioco</h2></p>
+    <table class="table table-striped" style="margin: 10%;">
+      <thead style="background-color: #f1f1f1">
+      <tr>
+        <th scope="col">Nome Skill</th>
+        <th scope="col">Tipo Skill</th>
+        <th scope="col">Descrizione Skill</th>
+        <th scope="col">Calciaotri che la posseggono</th>
+      </tr>
+      </thead>
+      <tbody>
+    <%
+      for (SkillBean sp : dao.doRetrieveSpecialSkillsWithNameAndResourceSoccerPlayer())
+      {
+        ArrayList<String> calciatori = new ArrayList<>();
+        ArrayList<String> uri = new ArrayList<>();
+        for(SoccerPlayerBean sc : sp.getPlayers()){
+          calciatori.add(sc.getName());
+          uri.add(sc.getUri());
+        }
+
+
+
+
+    %>
+        <tr>
+          <td scope="row"><%=sp.getNome()%></td>
+          <td><%=sp.getTipo()%></td>
+          <td><%=sp.getDescrizione()%></td>
+          <td><%for(int index = 0; index< calciatori.size();index ++) {
+            LoggerSingleton.getInstance().debug("\n\n"+uri.get(index));
+          %> <a href="SpecificPlayer?player=<%=uri.get(index)%>"><%=calciatori.get(index)%>></a><%}%></td>
+         <!-- <%// for(i=0 ; i<calciatori.size(); i++)
+            %>
+          <td><a href="SpecificPlayer?player=<%=uri.get(i)%>" class="card-link"><%=calciatori.get(i)%></a></td><%
+          %>
+         -->
+        </tr>
+    <%}%>
+      </tbody>
+    </table>
+  </div>
+
 </div>
 
 <!-- Footer -->

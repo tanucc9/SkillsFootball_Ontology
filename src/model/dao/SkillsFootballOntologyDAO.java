@@ -151,8 +151,8 @@ public class SkillsFootballOntologyDAO {
             String[] full_name = qSolution.getLiteral("fullnames").getString().split(",");
             for(int i=0; i<resource.length;i++){
                 SoccerPlayerBean iPlayer = new SoccerPlayerBean();
-                iPlayer.setUri(resource[0]);
-                iPlayer.setName(full_name[0]);
+                iPlayer.setUri(resource[i]);
+                iPlayer.setName(full_name[i]);
                 soccerPlayers.add(i,iPlayer);
             }
             skill_row.setPlayers(soccerPlayers);
