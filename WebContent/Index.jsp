@@ -26,7 +26,9 @@
     int i = 0;
 
     for (SoccerPlayerBean sp : dao.doRetrieveBest30SoccerPlayerInTheWorld())
-    {%>
+    {
+      if (!sp.getName().equals("\"playing-style\"")) {
+  %>
   <div class="col-lg-4">
     <div data-uri="<%= sp.getUri() %>" class="card card_player" style="width: 15rem; height: 36rem; margin: 5rem;">
       <img class="card-img-top" src="<%=sp.getThumbnail()%>" alt="Card image cap">
@@ -45,7 +47,7 @@
       </div>
     </div>
   </div>
-  <%}%>
+  <%}}%>
   </div>
 </div>
 

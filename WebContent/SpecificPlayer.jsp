@@ -85,7 +85,7 @@
                 const data = {
                     labels: <%= arrJSLabels %>,
                     datasets: [{
-                        label: 'Skills  <%= player.getName() %>',
+                        label: "Skills  <%= player.getName() %>",
                         data: <%= arrJSdata %>,
                         fill: true,
                         backgroundColor: 'rgba(255, 99, 132, 0.2)',
