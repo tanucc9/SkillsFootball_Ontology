@@ -1,0 +1,24 @@
+.hide_btn {
+    display: none;
+}
+
+.btn_ballondor {
+    position: relative;
+}
+
+.card_player .card-img-top,
+.card_player .card-body {
+    cursor: pointer;
+}
+
+.card_player .card-img-top {
+    width: 100%;
+    height: 290px;
+    object-fit: cover;
+    object-position: top;
+}
+
+.card_player .card-body {
+    flex: none!important;
+    height: 110px;
+}
