@@ -3,7 +3,6 @@
 <%@ page import="model.bean.FootBallTeamBean" %>
 <%@ page import="model.bean.SkillBean" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="utils.LoggerSingleton" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 	
@@ -23,9 +22,10 @@
   <div class="row">
   <%
     SkillsFootballOntologyDAO dao = new SkillsFootballOntologyDAO();
-    int i = 0;
 
-    for (SoccerPlayerBean sp : dao.doRetrieveBest30SoccerPlayerInTheWorld())
+    ArrayList<SoccerPlayerBean> players = dao.doRetrieveBest30SoccerPlayerInTheWorld();
+    if (players != null) {
+    for (SoccerPlayerBean sp : players)
     {
       if (!sp.getName().equals("\"playing-style\"")) {
   %>
@@ -48,15 +48,18 @@
       </div>
     </div>
   </div>
-  <%}}%>
+  <%}}}%>
   </div>
 </div>
 
 <div class="container" style="margin-top: 50px">
-    <h2> Le migliori squadre di calcio</h2>
-  <div class="row">
     <%
-      for (FootBallTeamBean ft : dao.doRetrieveStatsFootballTeamWithMaxAvgAndMinimunOverall())
+      ArrayList<FootBallTeamBean> teams = dao.doRetrieveStatsFootballTeamWithMaxAvgAndMinimunOverall();
+      if (teams != null) { %>
+      <h2> Le migliori squadre di calcio</h2>
+      <div class="row">
+    <%
+      for (FootBallTeamBean ft : teams)
       {%>
     <div class="col-lg-4">
       <div class="card card_team" style="width: 15rem; height: 28rem; margin: 5rem;" data-thumb="<%= ft.getThumbnail() %>">
@@ -72,7 +75,7 @@
         </ul>
       </div>
     </div>
-    <%}%>
+    <%}}%>
   </div>
   </div>
 
@@ -81,14 +84,19 @@
     <h2>Info skill speciali</h2>
 
     <table class="table table-striped table-hover">
+      <%
+        ArrayList<SkillBean> specialSkills = dao.doRetrieveSpecialSkillsWithNameAndResourceSoccerPlayer();
+        if (specialSkills != null) { %>
+
       <tr>
         <th>Nome</th>
         <th>Tipo</th>
         <th>Descrizione</th>
         <th >Calciatori che posseggono la skill</th>
       </tr>
+
       <%
-        for (SkillBean sp : dao.doRetrieveSpecialSkillsWithNameAndResourceSoccerPlayer())
+        for (SkillBean sp : specialSkills)
         {
           ArrayList<String> calciatori = new ArrayList<>();
           ArrayList<String> uri = new ArrayList<>();
@@ -103,49 +111,14 @@
         <td><%=sp.getDescrizione()%></td>
         <td>
           <%for(int index = 0; index< calciatori.size();index ++) {%>
-          <a href="SpecificPlayer?player=<%=uri.get(index)%>"><%=calciatori.get(index)%>></a>
+          <a href="SpecificPlayer?player=<%=uri.get(index)%>"><%=calciatori.get(index)%></a>,
           <%}%>
         </td>
       </tr>
-      <%}%>
+      <%}}%>
 
-    </table>
-
-
-    <table class="table table-striped" style="margin: 10%;">
-    <%
-      for (SkillBean sp : dao.doRetrieveSpecialSkillsWithNameAndResourceSoccerPlayer())
-      {
-        ArrayList<String> calciatori = new ArrayList<>();
-        ArrayList<String> uri = new ArrayList<>();
-        for(SoccerPlayerBean sc : sp.getPlayers()){
-          calciatori.add(sc.getName());
-          uri.add(sc.getUri());
-        }
-
-
-
-
-    %>
-        <tr>
-          <td scope="row"><%=sp.getNome()%></td>
-          <td><%=sp.getTipo()%></td>
-          <td><%=sp.getDescrizione()%></td>
-          <td><%for(int index = 0; index< calciatori.size();index ++) {
-            LoggerSingleton.getInstance().debug("\n\n"+uri.get(index));
-          %> <a href="SpecificPlayer?player=<%=uri.get(index)%>"><%=calciatori.get(index)%>></a><%}%></td>
-         <!-- <%// for(i=0 ; i<calciatori.size(); i++)
-            %>
-          <td><a href="SpecificPlayer?player=<%=uri.get(i)%>" class="card-link"><%=calciatori.get(i)%></a></td><%
-          %>
-         -->
-        </tr>
-    <%}%>
-      </tbody>
     </table>
   </div>
-
-</div>
 
 <!-- Footer -->
 <jsp:include page="./parts/footer.jsp" />

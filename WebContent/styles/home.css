@@ -18,7 +18,19 @@
     object-position: top;
 }
 
-.card_player .card-body {
+.card .card-body {
     flex: none!important;
     height: 110px;
+}
+
+.card {
+    margin-top: 30px!important;
+    margin-bottom: 30px!important;
+}
+
+.card_team .card-img-top {
+    height: 240px;
+    width: 100%;
+    object-fit: contain;
+    padding: 10px;
 }
