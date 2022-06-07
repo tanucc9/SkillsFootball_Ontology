@@ -48,8 +48,12 @@ public class SpecificPlayerServlet extends HttpServlet {
         SoccerPlayerBean player = sDao.doSpecificPlayer(uriPlayer);
         ArrayList<SkillBean> skills = sDao.doSpecialSkillPlayer(uriPlayer);
 
+        String uriCurrClub = "<" + player.getFottballTeamBean().getUri() + ">";
+        ArrayList<SoccerPlayerBean> relatedPlayers = sDao.doRetrieveRelatedPlayers(uriCurrClub, uriPlayer);
+
         request.setAttribute("player", player);
         request.setAttribute("skills", skills);
+        request.setAttribute("relatedPlayers", relatedPlayers);
         RequestDispatcher dispatcher = request
                 .getRequestDispatcher(response.encodeRedirectURL("./SpecificPlayer.jsp"));
         dispatcher.forward(request, response);

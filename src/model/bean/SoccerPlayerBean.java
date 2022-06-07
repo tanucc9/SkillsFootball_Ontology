@@ -61,7 +61,15 @@ public class SoccerPlayerBean {
     }
 
     public void setPosition(String position) {
-        this.position = position.replaceAll("\\(calcio\\)", "");
+        String[] splittedPos = position.split(",");
+        for (int i = 0; i < splittedPos.length; i++) {
+            if (i == 0) {
+                this.position = splittedPos[i];
+            } else if (!this.position.contains(splittedPos[i])) {
+                    this.position += ", " + splittedPos[i];
+            }
+        }
+        this.position = this.position.replaceAll("\\(calcio\\)", "");
     }
 
     public String getUri() {

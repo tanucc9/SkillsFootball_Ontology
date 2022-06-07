@@ -383,4 +383,63 @@ public class SkillsFootballOntologyDAO {
         return null;
     }
 
+    public ArrayList<SoccerPlayerBean>  doRetrieveRelatedPlayers(String uriCurrClub, String uriPlayer) {
+        ArrayList<SoccerPlayerBean> players = new ArrayList<>();
+
+        String q = "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n" +
+                "PREFIX db: <http://dbpedia.org/>\n" +
+                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" +
+                "PREFIX dbo: <http://dbpedia.org/ontology/>\n" +
+                "PREFIX dbp: <http://dbpedia.org/property/>\n" +
+                "PREFIX myonto: <http://www.semanticweb.org/tanucc/ontologies/2022/4/skillsFootball>\n" +
+                "\n" +
+                "SELECT DISTINCT ?name ?individual ?currClub ?currClubThumbnail ?thumbnail ?overall (GROUP_CONCAT(?position;SEPARATOR=\",\") AS ?positions) \n" +
+                "WHERE {\n" +
+                "    SERVICE <http://dbpedia.org/sparql> {\n" +
+                "    ?individual dbp:name ?name .\n" +
+                "     ?individual dbp:currentclub " + uriCurrClub + " .\n" +
+                "    " + uriCurrClub + " rdfs:label ?currClub.\n" +
+                "    " + uriCurrClub + " dbo:thumbnail ?currClubThumbnail .\n" +
+                "\t?individual dbo:thumbnail ?thumbnail .\n" +
+                "    ?individual dbo:position ?posURI .\n" +
+                "    ?posURI rdfs:label ?position .\n" +
+                "    FILTER(LANG(?currClub) = 'en')\n" +
+                "    FILTER(LANG(?position) = 'it')\n" +
+                "    FILTER (?individual != " + uriPlayer + ")\n" +
+                "    }\n" +
+                "    ?player a dbo:SoccerPlayer .\n" +
+                "\t?player myonto:has_overall ?overall .\n" +
+                "  \t?stats_individual myonto:has_name ?name_stat .\n" +
+                "  \t?player rdfs:seeAlso ?individual.\n" +
+                "}\n" +
+                "\n" +
+                "GROUP BY ?name ?individual ?currClub ?currClubThumbnail ?thumbnail ?overall\n" +
+                "ORDER BY DESC (?overall)\n" +
+                "LIMIT 6\n";
+
+        Query query = QueryFactory.create(q);
+
+        // Esecuzione della querye cattura dei risultati
+        QueryExecution qexec = QueryExecutionFactory.sparqlService(endpoint, query);
+        ResultSet results = qexec.execSelect();
+        while (results.hasNext()) {
+            QuerySolution qSolution = results.nextSolution();
+            SoccerPlayerBean player = new SoccerPlayerBean();
+            FootBallTeamBean team = new FootBallTeamBean();
+            player.setUri(qSolution.getResource("individual").getURI());
+            player.setName(qSolution.getLiteral("name").getString());
+            player.setThumbnail(qSolution.getResource("thumbnail").getURI());
+            player.setPosition(qSolution.getLiteral("positions").getString());
+            player.setOverall(qSolution.getLiteral("overall").getInt());
+            team.setUri(uriCurrClub);
+            team.setThumbnail(qSolution.getResource("currClubThumbnail").getURI());
+            team.setName(qSolution.getLiteral("currClub").getString());
+            player.setFottballTeamBean(team);
+            players.add(player);
+        }
+        qexec.close();
+        return players;
+    }
+
+
 }

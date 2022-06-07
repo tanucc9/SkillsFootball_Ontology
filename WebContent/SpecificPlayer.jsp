@@ -11,7 +11,8 @@
 
 <% SoccerPlayerBean player = (SoccerPlayerBean) request.getAttribute("player");
     ArrayList<SkillBean> skills = (ArrayList<SkillBean>) request.getAttribute("skills");
-    if (player == null || skills == null) {
+    ArrayList<SoccerPlayerBean> relatedPlayers = (ArrayList<SoccerPlayerBean>) request.getAttribute("relatedPlayers");
+    if (player == null || skills == null || relatedPlayers == null) {
         response.sendRedirect("./Index.jsp");
         return;
     }
@@ -144,7 +145,30 @@
 </div>
 
 <div class="container">
+    <h3 class="margin-25">Calciatori correlati</h3>
+    <div class="row">
+    <% for (SoccerPlayerBean sp : relatedPlayers) { %>
+    <div class="col-lg-4">
+        <div data-uri="<%= sp.getUri() %>" class="card card_player" style="width: 15rem; height: 32rem; margin: 5rem;" data-thumb="<%= sp.getThumbnail() %>">
+            <img class="card-img-top" src="<%=sp.getThumbnail()%>" alt="Card image cap">
+            <img src="./img/sample-soccer-player.png" class="card-img-top img_sample" style="display: none;">
+            <div class="card-body">
+                <h5 class="card-title"><%=sp.getName()%></h5>
+                <p class="card-text"><%=sp.getFottballTeamBean().getName()%></p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Overall : <%=sp.getOverall()%></li>
+                <li class="list-group-item">Ruolo : <%=sp.getPosition()%></li>
 
+            </ul>
+            <div class="card-body">
+                <%if(sp.getOverall()>91){%><p style="color: darkgoldenrod">Questo giocatore ha vinto almeno un <a href="ServletBallonDOR">pallone d'oro</a></p>
+                <%}%>
+            </div>
+        </div>
+    </div>
+    <% } %>
+    </div>
 </div>
 
 <div class="container">
@@ -178,5 +202,6 @@
 <jsp:include page="./parts/footer.jsp" />
 <!-- Footer -->
 
+<script src="scripts/cards.js"></script>
 </body>
 </html>

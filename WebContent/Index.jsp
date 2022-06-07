@@ -30,7 +30,7 @@
       if (!sp.getName().equals("\"playing-style\"")) {
   %>
   <div class="col-lg-4">
-    <div data-uri="<%= sp.getUri() %>" class="card card_player" style="width: 15rem; height: 36rem; margin: 5rem;" data-thumb="<%= sp.getThumbnail() %>">
+    <div data-uri="<%= sp.getUri() %>" class="card card_player" style="width: 15rem; height: 32rem; margin: 5rem;" data-thumb="<%= sp.getThumbnail() %>">
       <img class="card-img-top" src="<%=sp.getThumbnail()%>" alt="Card image cap">
       <img src="./img/sample-soccer-player.png" class="card-img-top img_sample" style="display: none;">
       <div class="card-body">
