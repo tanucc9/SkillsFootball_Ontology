@@ -1,4 +1,4 @@
-package control.prova;
+package control;
 
 import model.bean.SkillBean;
 import model.bean.SoccerPlayerBean;

@@ -20,28 +20,27 @@ public class SkillsFootballOntologyDAO {
                 "PREFIX dbo: <http://dbpedia.org/ontology/>\n" +
                 "PREFIX dbp: <http://dbpedia.org/property/>\n" +
                 "PREFIX myonto: <http://www.semanticweb.org/tanucc/ontologies/2022/4/skillsFootball>\n" +
-                "\n" +
-                "SELECT DISTINCT ?individual ?name ?position ?currClub ?currClubURI ?currClubThumbnail ?overall ?thumbnail\n" +
+                "SELECT DISTINCT ?individual ?name ?currClub ?currClubURI ?currClubThumbnail ?overall ?thumbnail (GROUP_CONCAT(?position;SEPARATOR=\",\") AS ?positions)\n" +
                 "WHERE {\n" +
-                "      SERVICE <http://dbpedia.org/sparql> {\n" +
-                "    ?individual a dbo:SoccerPlayer .\n" +
-                "    ?individual dbp:name ?name .\n" +
-                "    ?individual dbp:currentclub ?currClubURI .\n" +
-                "    ?currClubURI rdfs:label ?currClub.\n" +
-                "    ?currClubURI dbo:thumbnail ?currClubThumbnail .\n" +
-                "    ?individual dbo:thumbnail ?thumbnail .\n" +
-                "    ?individual dbo:position ?posURI .\n" +
-                "    ?posURI rdfs:label ?position .\n" +
-                "    FILTER(LANG(?currClub) = 'en')\n" +
-                "    FILTER(LANG(?position) = 'it')\n" +
-                "  }\n" +
+                "\tSERVICE <http://dbpedia.org/sparql> {\n" +
+                "      ?individual a dbo:SoccerPlayer .\n" +
+                "      ?individual dbp:name ?name .\n" +
+                "      ?individual dbp:currentclub ?currClubURI .\n" +
+                "      ?currClubURI rdfs:label ?currClub.\n" +
+                "      ?currClubURI dbo:thumbnail ?currClubThumbnail .\n" +
+                "      ?individual dbo:thumbnail ?thumbnail .\n" +
+                "      ?individual dbo:position ?posURI .\n" +
+                "      ?posURI rdfs:label ?position .\n" +
+                "      FILTER(LANG(?currClub) = 'en')\n" +
+                "      FILTER(LANG(?position) = 'it')\n" +
+                "\t}\n" +
                 "    ?player a dbo:SoccerPlayer .\n" +
-                "  \t?player myonto:has_overall ?overall .\n" +
-                "  \t?player rdfs:seeAlso ?individual .\n" +
+                "    ?player myonto:has_overall ?overall .\n" +
+                "    ?player rdfs:seeAlso ?individual .\n" +
                 "}\n" +
+                "GROUP BY ?individual ?name ?currClub ?currClubURI ?currClubThumbnail ?overall ?thumbnail\n" +
                 "ORDER BY DESC(?overall)\n" +
-                "LIMIT 30\n" +
-                "\n";
+                "LIMIT 30";
 
         Query query = QueryFactory.create(q);
 
@@ -55,7 +54,7 @@ public class SkillsFootballOntologyDAO {
             player.setUri(qSolution.getResource("individual").getURI());
             player.setName(qSolution.getLiteral("name").getString());
             player.setThumbnail(qSolution.getResource("thumbnail").getURI());
-            player.setPosition(qSolution.getLiteral("position").getString());
+            player.setPosition(qSolution.getLiteral("positions").getString());
             player.setOverall(qSolution.getLiteral("overall").getInt());
             team.setUri(qSolution.getResource("currClubURI").getURI());
             team.setThumbnail(qSolution.getResource("currClubThumbnail").getURI());
@@ -116,7 +115,6 @@ public class SkillsFootballOntologyDAO {
     }
     public ArrayList<SkillBean> doRetrieveSpecialSkillsWithNameAndResourceSoccerPlayer() {
         ArrayList<SkillBean> result = new ArrayList<>();
-
 
         String q = "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n" +
                 "PREFIX db: <http://dbpedia.org/>\n" +
@@ -352,4 +350,32 @@ public class SkillsFootballOntologyDAO {
 
         return skills;
     }
+
+    public String doRetrieveURIDBPPlayer(String resourcePlayerMyOnto) {
+
+        String q = "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n" +
+                "PREFIX db: <http://dbpedia.org/>\n" +
+                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" +
+                "PREFIX dbo: <http://dbpedia.org/ontology/>\n" +
+                "PREFIX dbp: <http://dbpedia.org/property/>\n" +
+                "PREFIX myonto: <http://www.semanticweb.org/tanucc/ontologies/2022/4/skillsFootball>\n" +
+                "\n" +
+                "SELECT DISTINCT ?player \n" +
+                "WHERE {\n" +
+                "    myonto:" + resourcePlayerMyOnto + " rdfs:seeAlso ?player .\n" +
+                "}";
+
+        Query query = QueryFactory.create(q);
+
+        QueryExecution qexec = QueryExecutionFactory.sparqlService(endpoint, query);
+        ResultSet results = qexec.execSelect();
+        while (results.hasNext()) {
+            QuerySolution qSolution = results.nextSolution();
+            return qSolution.getResource("player").getURI();
+        }
+        qexec.close();
+
+        return null;
+    }
+
 }

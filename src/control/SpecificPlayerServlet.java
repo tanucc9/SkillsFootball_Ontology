@@ -1,6 +1,5 @@
-package control.prova;
+package control;
 
-import model.bean.FootBallTeamBean;
 import model.bean.SkillBean;
 import model.bean.SoccerPlayerBean;
 import model.dao.SkillsFootballOntologyDAO;
@@ -35,15 +34,19 @@ public class SpecificPlayerServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        //@todo edit mock uriPlayer
-        String uriPlayer = "<"+request.getParameter("player")+">";
-
+        String uriPlayer = request.getParameter("player");
         SkillsFootballOntologyDAO sDao = new SkillsFootballOntologyDAO();
-        SoccerPlayerBean player = sDao.doSpecificPlayer(uriPlayer);
-        ArrayList<SkillBean> skills = sDao.doSpecialSkillPlayer(uriPlayer);
+
+        if (uriPlayer.contains("http://www.semanticweb.org/tanucc/ontologies/2022/4/skillsFootball")) {
+            uriPlayer = sDao.doRetrieveURIDBPPlayer(uriPlayer.split("skillsFootball")[1]);
+        }
 
         LoggerSingleton l = LoggerSingleton.getInstance();
-        l.debug(player.toString());
+        l.debug("uriPLayer " + uriPlayer);
+
+        uriPlayer = "<" + uriPlayer + ">";
+        SoccerPlayerBean player = sDao.doSpecificPlayer(uriPlayer);
+        ArrayList<SkillBean> skills = sDao.doSpecialSkillPlayer(uriPlayer);
 
         request.setAttribute("player", player);
         request.setAttribute("skills", skills);
