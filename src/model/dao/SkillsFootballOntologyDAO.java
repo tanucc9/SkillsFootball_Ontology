@@ -242,7 +242,7 @@ public class SkillsFootballOntologyDAO {
                 "PREFIX dbp: <http://dbpedia.org/property/>\n" +
                 "PREFIX myonto: <http://www.semanticweb.org/tanucc/ontologies/2022/4/skillsFootball>\n" +
                 "\n" +
-                "SELECT DISTINCT ?name ?position ?currClub ?currClubURI ?currClubThumbnail ?thumbnail ?stats ?name_stat ?stats_individual ?comment ?type_stat ?descr_stat \n" +
+                "SELECT DISTINCT ?name (GROUP_CONCAT(?position;SEPARATOR=\",\") AS ?positions) ?currClub ?currClubURI ?currClubThumbnail ?thumbnail ?stats ?name_stat ?stats_individual ?comment ?type_stat ?descr_stat \n" +
                 "WHERE {\n" +
                 "  {\n" +
                 "    SERVICE <http://dbpedia.org/sparql> {\n" +
@@ -269,7 +269,9 @@ public class SkillsFootballOntologyDAO {
                 "   ?stats_individual myonto:has_description ?descr_stat .\n" +
                 "  \t?player rdfs:seeAlso " + resourcePlayer + " .\n" +
                 "}\n" +
-                "}\n";
+                "}\n " +
+                "GROUP BY ?name ?currClub ?currClubURI ?currClubThumbnail ?thumbnail ?stats ?name_stat ?stats_individual ?comment ?type_stat ?descr_stat\n" +
+                "ORDER BY DESC(?name)\n";
 
         Query query = QueryFactory.create(q);
 
@@ -287,7 +289,7 @@ public class SkillsFootballOntologyDAO {
                 skills.add(skill);
             } else {
                 player.setName(qSolution.getLiteral("name").getString());
-                player.setPosition(qSolution.getLiteral("position").getString());
+                player.setPosition(qSolution.getLiteral("positions").getString());
                 team.setName(qSolution.getLiteral("currClub").getString());
                 team.setUri(qSolution.getResource("currClubURI").getURI());
                 team.setThumbnail(qSolution.getResource("currClubThumbnail").getURI());
