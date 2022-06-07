@@ -30,8 +30,9 @@
       if (!sp.getName().equals("\"playing-style\"")) {
   %>
   <div class="col-lg-4">
-    <div data-uri="<%= sp.getUri() %>" class="card card_player" style="width: 15rem; height: 36rem; margin: 5rem;">
+    <div data-uri="<%= sp.getUri() %>" class="card card_player" style="width: 15rem; height: 36rem; margin: 5rem;" data-thumb="<%= sp.getThumbnail() %>">
       <img class="card-img-top" src="<%=sp.getThumbnail()%>" alt="Card image cap">
+      <img src="./img/sample-soccer-player.png" class="card-img-top img_sample" style="display: none;">
       <div class="card-body">
         <h5 class="card-title"><%=sp.getName()%></h5>
         <p class="card-text"><%=sp.getFottballTeamBean().getName()%></p>
@@ -51,43 +52,67 @@
   </div>
 </div>
 
-
-
-<br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br>
-  <div  style="margin-top: 50%;">
-    <p><h2 style="color: #f1f1f1">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSquadre di calcio con la media dell'overall totale, il giocatore più forte e quello meno forte</h2></p>
+<div class="container" style="margin-top: 50px">
+    <h2> Le migliori squadre di calcio</h2>
+  <div class="row">
     <%
-
-
-      for (FootBallTeamBean sp : dao.doRetrieveStatsFootballTeamWithMaxAvgAndMinimunOverall())
+      for (FootBallTeamBean ft : dao.doRetrieveStatsFootballTeamWithMaxAvgAndMinimunOverall())
       {%>
-    <div class="column">
-      <div class="card" style="width: 15rem; height: 40rem; margin: 5rem;">
-        <img class="card-img-top" src="<%=sp.getThumbnail()%>" alt="Card image cap">
+    <div class="col-lg-4">
+      <div class="card card_team" style="width: 15rem; height: 28rem; margin: 5rem;" data-thumb="<%= ft.getThumbnail() %>">
+        <img class="card-img-top" src="<%= ft.getThumbnail() %>" alt="Card image cap">
+        <img src="./img/sample-logo-team.png" class="card-img-top img_sample" style="display: none;">
         <div class="card-body">
-          <h5 class="card-title"><%=sp.getName()%></h5>
-          <p class="card-text">Avg : <%=sp.getAvg_overall()%></p>
+          <h5 class="card-title"><%=ft.getName()%></h5>
+          <p class="card-text">Media overall : <%=ft.getAvg_overall()%></p>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item"> max Overall : <%=sp.getMax_overall()%></li>
-          <li class="list-group-item">min overall  : <%=sp.getMin_overall()%></li>
+          <li class="list-group-item"> Overall max : <%=ft.getMax_overall()%></li>
+          <li class="list-group-item"> Overall min  : <%=ft.getMin_overall()%></li>
         </ul>
       </div>
     </div>
     <%}%>
   </div>
-  <div  style="margin-top: 50%;">
-    <p><h2 style="color: #f1f1f1">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspEcco un elenco di tutte le skill speciali del gioco</h2></p>
-    <table class="table table-striped" style="margin: 10%;">
-      <thead style="background-color: #f1f1f1">
+  </div>
+
+
+  <div class="container">
+    <h2>Info skill speciali</h2>
+
+    <table class="table table-striped table-hover">
       <tr>
-        <th scope="col">Nome Skill</th>
-        <th scope="col">Tipo Skill</th>
-        <th scope="col">Descrizione Skill</th>
-        <th scope="col">Calciaotri che la posseggono</th>
+        <th>Nome</th>
+        <th>Tipo</th>
+        <th>Descrizione</th>
+        <th >Calciatori che posseggono la skill</th>
       </tr>
-      </thead>
-      <tbody>
+      <%
+        for (SkillBean sp : dao.doRetrieveSpecialSkillsWithNameAndResourceSoccerPlayer())
+        {
+          ArrayList<String> calciatori = new ArrayList<>();
+          ArrayList<String> uri = new ArrayList<>();
+          for(SoccerPlayerBean sc : sp.getPlayers()){
+            calciatori.add(sc.getName());
+            uri.add(sc.getUri());
+          }
+      %>
+      <tr>
+        <td><%=sp.getNome()%></td>
+        <td><%=sp.getTipo()%></td>
+        <td><%=sp.getDescrizione()%></td>
+        <td>
+          <%for(int index = 0; index< calciatori.size();index ++) {%>
+          <a href="SpecificPlayer?player=<%=uri.get(index)%>"><%=calciatori.get(index)%>></a>
+          <%}%>
+        </td>
+      </tr>
+      <%}%>
+
+    </table>
+
+
+    <table class="table table-striped" style="margin: 10%;">
     <%
       for (SkillBean sp : dao.doRetrieveSpecialSkillsWithNameAndResourceSoccerPlayer())
       {
@@ -126,6 +151,6 @@
 <jsp:include page="./parts/footer.jsp" />
 <!-- Footer -->
 
-<script src="./scripts/click_card.js"></script>
+<script src="scripts/cards.js"></script>
 </body>
 </html>
