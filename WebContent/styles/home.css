@@ -37,3 +37,8 @@
     object-fit: contain;
     padding: 10px;
 }
+
+.fa-arrow-up-right-from-square {
+    font-size: 15px!important;
+    color: black!important;
+}

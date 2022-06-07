@@ -66,7 +66,12 @@
         <img class="card-img-top" src="<%= ft.getThumbnail() %>" alt="Card image cap">
         <img src="./img/sample-logo-team.png" class="card-img-top img_sample" style="display: none;">
         <div class="card-body">
-          <h5 class="card-title"><%=ft.getName()%></h5>
+          <h5 class="card-title">
+            <%=ft.getName()%>
+            <a href="<%= ft.getUri() %>" target="_blank">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </h5>
           <p class="card-text">Media overall : <%=ft.getAvg_overall()%></p>
         </div>
         <ul class="list-group list-group-flush">
