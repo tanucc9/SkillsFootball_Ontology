@@ -48,8 +48,6 @@ public class SpecificPlayerServlet extends HttpServlet {
             uriPlayer = sDao.doRetrieveURIDBPPlayer(uriPlayer.split("skillsFootball")[1]);
         }
 
-        l.debug("uriPLayer " + uriPlayer);
-
         uriPlayer = "<" + uriPlayer + ">";
         SoccerPlayerBean player = sDao.doSpecificPlayer(uriPlayer);
         ArrayList<SkillBean> skills = sDao.doSpecialSkillPlayer(uriPlayer);

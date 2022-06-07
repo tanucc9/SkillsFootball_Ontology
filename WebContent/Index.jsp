@@ -43,7 +43,7 @@
 
       </ul>
       <div class="card-body">
-        <%if(sp.getOverall()>91){%><p style="color: darkgoldenrod">Questo giocatore ha vinto almeno un <a href="ServletBallonDOR">pallone d'oro</a></p>
+        <%if(dao.hasPlayerWonBallonDor("<" + sp.getUri() + ">")){%><p style="color: darkgoldenrod">Questo giocatore ha vinto almeno un <a href="ServletBallonDOR">pallone d'oro</a></p>
         <%}%>
       </div>
     </div>

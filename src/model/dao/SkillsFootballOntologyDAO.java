@@ -310,7 +310,6 @@ public class SkillsFootballOntologyDAO {
             }
         }
         qexec.close();
-
         player.setSkills(skills);
 
         return player;
@@ -452,5 +451,22 @@ public class SkillsFootballOntologyDAO {
         return players;
     }
 
+    public boolean hasPlayerWonBallonDor(String uriPlayer) {
 
+        String q = "PREFIX dbo: <http://dbpedia.org/ontology/>\n" +
+                "\n" +
+                "ASK  {\n" +
+                "  SERVICE <http://dbpedia.org/sparql> {\n" +
+                "\t" + uriPlayer + " dbo:wikiPageWikiLink <http://dbpedia.org/resource/Category:Ballon_d'Or_winners>.\n" +
+                "  }\n" +
+                "}";
+
+        Query query = QueryFactory.create(q);
+
+        // Esecuzione della querye cattura dei risultati
+        QueryExecution qexec = QueryExecutionFactory.sparqlService(endpoint, query);
+        boolean result = qexec.execAsk();
+        qexec.close();
+        return result;
+    }
 }
