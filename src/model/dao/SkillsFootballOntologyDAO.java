@@ -6,7 +6,6 @@ import model.bean.SoccerPlayerBean;
 import org.apache.jena.query.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class SkillsFootballOntologyDAO {
     private final String endpoint = "http://localhost:3030/SkillsFootball/query";
@@ -59,7 +58,7 @@ public class SkillsFootballOntologyDAO {
             team.setUri(qSolution.getResource("currClubURI").getURI());
             team.setThumbnail(qSolution.getResource("currClubThumbnail").getURI());
             team.setName(qSolution.getLiteral("currClub").getString());
-            player.setFottballTeamBean(team);
+            player.setFootballTeamBean(team);
             players.add(player);
         }
         qexec.close();
@@ -218,7 +217,7 @@ public class SkillsFootballOntologyDAO {
             ftCurrent.setName(qSolution.getLiteral("currClub").getString());
             ftCurrent.setUri(qSolution.getResource("currClubURI").getURI());
             ftCurrent.setThumbnail(qSolution.getResource("currClubThumbnail").getURI());
-            spCurrent.setFottballTeamBean(ftCurrent);
+            spCurrent.setFootballTeamBean(ftCurrent);
             spCurrent.setOverall(qSolution.getLiteral("overall").getInt());
             spCurrent.setThumbnail(qSolution.getResource("thumbnail_player").getURI());
             spCurrent.setLabel_BallonDOr(qSolution.getLiteral("label_ballondor").getString());
@@ -245,18 +244,25 @@ public class SkillsFootballOntologyDAO {
                 "SELECT DISTINCT ?name (GROUP_CONCAT(?position;SEPARATOR=\",\") AS ?positions) ?currClub ?currClubURI ?currClubThumbnail ?thumbnail ?stats ?name_stat ?stats_individual ?comment ?type_stat ?descr_stat \n" +
                 "WHERE {\n" +
                 "  {\n" +
+                "    {\n" +
                 "    SERVICE <http://dbpedia.org/sparql> {\n" +
                 "    " + resourcePlayer + " dbp:name ?name .\n" +
-                "    " + resourcePlayer + " dbp:currentclub ?currClubURI .\n" +
-                "    " + resourcePlayer + "rdfs:comment ?comment ." +
+                "     " + resourcePlayer + " dbp:currentclub ?currClubURI .\n" +
+                "      " + resourcePlayer + " rdfs:comment ?comment .\n" +
                 "    ?currClubURI rdfs:label ?currClub.\n" +
                 "    ?currClubURI dbo:thumbnail ?currClubThumbnail .\n" +
-                "    " + resourcePlayer + " dbo:thumbnail ?thumbnail .\n" +
                 "    " + resourcePlayer + " dbo:position ?posURI .\n" +
                 "    ?posURI rdfs:label ?position .\n" +
                 "    FILTER(LANG(?currClub) = 'it')\n" +
                 "    FILTER(LANG(?position) = 'it')\n" +
-                "    FILTER(LANG(?comment) = 'it')" +
+                "      FILTER(LANG(?comment) = 'it')\n" +
+                "      }\n" +
+                "    }\n" +
+                "    OPTIONAL\n" +
+                "    {\n" +
+                "      SERVICE <http://dbpedia.org/sparql> {\n" +
+                "      \t" + resourcePlayer + " dbo:thumbnail ?thumbnail .\n" +
+                "      }\n" +
                 "    }\n" +
                 "}\n" +
                 "  UNION\n" +
@@ -265,11 +271,12 @@ public class SkillsFootballOntologyDAO {
                 "  \t?player ?p ?stats .\n" +
                 "  \t?p rdfs:seeAlso ?stats_individual.\n" +
                 "  \t?stats_individual myonto:has_name ?name_stat .\n" +
-                "   ?stats_individual myonto:is_type ?type_stat .\n" +
-                "   ?stats_individual myonto:has_description ?descr_stat .\n" +
-                "  \t?player rdfs:seeAlso " + resourcePlayer + " .\n" +
+                "    ?stats_individual myonto:is_type ?type_stat .\n" +
+                "    ?stats_individual myonto:has_description ?descr_stat .\n" +
+                "  \t?player rdfs:seeAlso " + resourcePlayer + ".\n" +
                 "}\n" +
-                "}\n " +
+                "}\n" +
+                "\n" +
                 "GROUP BY ?name ?currClub ?currClubURI ?currClubThumbnail ?thumbnail ?stats ?name_stat ?stats_individual ?comment ?type_stat ?descr_stat\n" +
                 "ORDER BY DESC(?name)\n";
 
@@ -293,9 +300,13 @@ public class SkillsFootballOntologyDAO {
                 team.setName(qSolution.getLiteral("currClub").getString());
                 team.setUri(qSolution.getResource("currClubURI").getURI());
                 team.setThumbnail(qSolution.getResource("currClubThumbnail").getURI());
-                player.setThumbnail(qSolution.getResource("thumbnail").getURI());
+                if (qSolution.getResource("thumbnail") != null) {
+                    player.setThumbnail(qSolution.getResource("thumbnail").getURI());
+                } else {
+                    player.setThumbnail("no thumbnail");
+                }
                 player.setComment(qSolution.getLiteral("comment").getString());
-                player.setFottballTeamBean(team);
+                player.setFootballTeamBean(team);
             }
         }
         qexec.close();
@@ -434,7 +445,7 @@ public class SkillsFootballOntologyDAO {
             team.setUri(uriCurrClub);
             team.setThumbnail(qSolution.getResource("currClubThumbnail").getURI());
             team.setName(qSolution.getLiteral("currClub").getString());
-            player.setFottballTeamBean(team);
+            player.setFootballTeamBean(team);
             players.add(player);
         }
         qexec.close();

@@ -1,13 +1,12 @@
 package model.bean;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class SoccerPlayerBean {
 
     private String uri;
     private String name;
-    private FootBallTeamBean fottballTeamBean;
+    private FootBallTeamBean footballTeamBean;
     private int overall;
     private String position;
     private String thumbnail;
@@ -21,7 +20,7 @@ public class SoccerPlayerBean {
         return "SoccerPlayerBean{" +
                 "uri='" + uri + '\'' +
                 ", name='" + name + '\'' +
-                ", fottballTeamBean=" + fottballTeamBean +
+                ", fottballTeamBean=" + footballTeamBean +
                 ", overall=" + overall +
                 ", position='" + position + '\'' +
                 ", thumbnail='" + thumbnail + '\'' +
@@ -88,12 +87,12 @@ public class SoccerPlayerBean {
         this.name = name;
     }
 
-    public FootBallTeamBean getFottballTeamBean() {
-        return fottballTeamBean;
+    public FootBallTeamBean getFootballTeamBean() {
+        return footballTeamBean;
     }
 
-    public void setFottballTeamBean(FootBallTeamBean fottballTeamBean) {
-        this.fottballTeamBean = fottballTeamBean;
+    public void setFootballTeamBean(FootBallTeamBean footballTeamBean) {
+        this.footballTeamBean = footballTeamBean;
     }
 
     public int getOverall() {

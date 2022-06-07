@@ -48,7 +48,7 @@
     <p><%= player.getComment() %></p>
     <div class="row">
         <div class="col-lg-6">
-            <p><b>Squadra attuale:</b> <a href="<%= player.getFottballTeamBean().getUri()%>" target="_blank"><%= player.getFottballTeamBean().getName()%></a></p>
+            <p><b>Squadra attuale:</b> <a href="<%= player.getFootballTeamBean().getUri() %>" target="_blank"><%= player.getFootballTeamBean().getName()%></a></p>
         </div>
         <div class="col-lg-6">
             <p><b>Posizione:</b> <%= player.getPosition() %></p>
@@ -154,7 +154,7 @@
             <img src="./img/sample-soccer-player.png" class="card-img-top img_sample" style="display: none;">
             <div class="card-body">
                 <h5 class="card-title"><%=sp.getName()%></h5>
-                <p class="card-text"><%=sp.getFottballTeamBean().getName()%></p>
+                <p class="card-text"><%=sp.getFootballTeamBean().getName()%></p>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Overall : <%=sp.getOverall()%></li>

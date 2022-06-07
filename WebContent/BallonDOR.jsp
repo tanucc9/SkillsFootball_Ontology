@@ -36,7 +36,7 @@
             <img src="./img/sample-soccer-player.png" class="card-img-top img_sample" style="display: none;">
             <div class="card-body">
                 <h5 class="card-title"><%=sp.getName()%></h5>
-                <p class="card-text"><%=sp.getFottballTeamBean().getName()%></p>
+                <p class="card-text"><%=sp.getFootballTeamBean().getName()%></p>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Overall : <%=sp.getOverall()%></li>
