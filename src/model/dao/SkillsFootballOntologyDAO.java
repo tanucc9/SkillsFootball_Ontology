@@ -318,7 +318,7 @@ public class SkillsFootballOntologyDAO {
                 "PREFIX dbp: <http://dbpedia.org/property/>\n" +
                 "PREFIX myonto: <http://www.semanticweb.org/tanucc/ontologies/2022/4/skillsFootball>\n" +
                 "\n" +
-                "SELECT DISTINCT ?player (GROUP_CONCAT(?special_skill;SEPARATOR=\",\") AS ?special_skills) (GROUP_CONCAT(?special_skill_descr;SEPARATOR=\"§\") AS ?special_skills_descr)\n" +
+                "SELECT DISTINCT ?player (GROUP_CONCAT(?special_skillURI;SEPARATOR=\",\") AS ?special_skills_uri) (GROUP_CONCAT(?special_skill;SEPARATOR=\",\") AS ?special_skills) (GROUP_CONCAT(?special_skill_descr;SEPARATOR=\"§\") AS ?special_skills_descr)\n" +
                 "WHERE {\n" +
                 "  ?player a dbo:SoccerPlayer .\n" +
                 "  ?player rdfs:seeAlso " + resourcePlayer + ".\n" +
@@ -338,13 +338,16 @@ public class SkillsFootballOntologyDAO {
 
             String skillNames = qSolution.getLiteral("special_skills").getString();
             String skillDescrs = qSolution.getLiteral("special_skills_descr").getString();
+            String skillUris = qSolution.getLiteral("special_skills_uri").getString();
 
             String[] splittedSkillNames = skillNames.split(",");
+            String[] splittedSkillUris = skillUris.split(",");
             String[] splittedSkillDescrs = skillDescrs.split("§");
             for (int i = 0; splittedSkillNames.length > i; i++) {
                 SkillBean skill = new SkillBean();
                 skill.setNome(splittedSkillNames[i]);
                 skill.setDescrizione(splittedSkillDescrs[i]);
+                skill.setUri(splittedSkillUris[i]);
                 skills.add(skill);
             }
         }

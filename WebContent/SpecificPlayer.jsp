@@ -14,7 +14,12 @@
     if (player == null || skills == null) {
         response.sendRedirect("./Index.jsp");
         return;
-    }%>
+    }
+
+    if (player.getName().equals("\"playing-style\"")) {
+        player.setName("Manuel Neuer"); // workaround for peter neuer
+    }
+%>
 
 <!DOCTYPE html>
 <html lang="it">
@@ -54,7 +59,7 @@
         for(SkillBean skill : skills) {
             %>
         <div class="col-lg-6">
-            <p><b><%= skill.getNome() %></b>: <%= skill.getDescrizione() %></p>
+            <p><b><%= skill.getNome() %></b> <a href="http://localhost:8080/SkillsFootballOntology#<%= skill.getNome() %>"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>: <%= skill.getDescrizione() %></p>
         </div>
         <%
         }

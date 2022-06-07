@@ -101,19 +101,19 @@
       </tr>
 
       <%
-        for (SkillBean sp : specialSkills)
+        for (SkillBean skill : specialSkills)
         {
           ArrayList<String> calciatori = new ArrayList<>();
           ArrayList<String> uri = new ArrayList<>();
-          for(SoccerPlayerBean sc : sp.getPlayers()){
+          for(SoccerPlayerBean sc : skill.getPlayers()){
             calciatori.add(sc.getName());
             uri.add(sc.getUri());
           }
       %>
-      <tr>
-        <td><%=sp.getNome()%></td>
-        <td><%=sp.getTipo()%></td>
-        <td><%=sp.getDescrizione()%></td>
+      <tr id="<%= skill.getNome() %>">
+        <td><%=skill.getNome()%></td>
+        <td><%=skill.getTipo()%></td>
+        <td><%=skill.getDescrizione()%></td>
         <td>
           <%for(int index = 0; index< calciatori.size();index ++) {%>
           <a href="SpecificPlayer?player=<%=uri.get(index)%>"><%=calciatori.get(index)%></a>,
