@@ -8,8 +8,11 @@
 <%@ page import="java.util.Arrays" %>
 <%@ page import="java.util.List" %>
 <%@ page import="utils.FormatQueryDatas" %>
+<%@ page import="model.dao.SkillsFootballOntologyDAO" %>
 
-<% SoccerPlayerBean player = (SoccerPlayerBean) request.getAttribute("player");
+<%
+    SkillsFootballOntologyDAO dao = new SkillsFootballOntologyDAO();
+    SoccerPlayerBean player = (SoccerPlayerBean) request.getAttribute("player");
     ArrayList<SkillBean> skills = (ArrayList<SkillBean>) request.getAttribute("skills");
     ArrayList<SoccerPlayerBean> relatedPlayers = (ArrayList<SoccerPlayerBean>) request.getAttribute("relatedPlayers");
     if (player == null || skills == null || relatedPlayers == null) {
@@ -172,7 +175,7 @@
 
             </ul>
             <div class="card-body">
-                <%if(sp.getOverall()>91){%><p style="color: darkgoldenrod">Questo giocatore ha vinto almeno un <a href="ServletBallonDOR">pallone d'oro</a></p>
+                <%if(dao.hasPlayerWonBallonDor("<" + sp.getUri() + ">")){%><p style="color: darkgoldenrod">Questo giocatore ha vinto almeno un <a href="ServletBallonDOR">pallone d'oro</a></p>
                 <%}%>
             </div>
         </div>
