@@ -41,7 +41,17 @@
             .image_player {
                 background-image: url("<%= player.getThumbnail() %>");
             }
+            .image_player_sample {
+                background-image: url("img/sample-soccer-player.png")!important;
+            }
         </style>
+        <script>
+            var img = new Image();
+            img.onerror = function () {
+                document.getElementsByClassName("image_player")[0].classList.add("image_player_sample");
+            };
+            img.src = "<%= player.getThumbnail() %>";
+        </script>
     </div>
 </div>
 <div class="container">
