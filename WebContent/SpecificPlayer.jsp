@@ -7,7 +7,6 @@
 <%@ page import="utils.ConverterJavaToJSUtil" %>
 <%@ page import="java.util.Arrays" %>
 <%@ page import="java.util.List" %>
-<%@ page import="utils.FormatQueryDatas" %>
 <%@ page import="model.dao.SkillsFootballOntologyDAO" %>
 
 <%

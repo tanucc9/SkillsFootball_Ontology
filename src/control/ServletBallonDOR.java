@@ -3,7 +3,6 @@ package control;
 import model.bean.SkillBean;
 import model.bean.SoccerPlayerBean;
 import model.dao.SkillsFootballOntologyDAO;
-import utils.LoggerSingleton;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

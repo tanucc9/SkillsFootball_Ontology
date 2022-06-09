@@ -3,7 +3,6 @@ package control;
 import model.bean.SkillBean;
 import model.bean.SoccerPlayerBean;
 import model.dao.SkillsFootballOntologyDAO;
-import utils.LoggerSingleton;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,7 +35,6 @@ public class SpecificPlayerServlet extends HttpServlet {
 
         String uriPlayer = request.getParameter("player");
         SkillsFootballOntologyDAO sDao = new SkillsFootballOntologyDAO();
-        LoggerSingleton l = LoggerSingleton.getInstance();
 
         try {
             if (uriPlayer.contains("http://www.semanticweb.org/tanucc/ontologies/2022/4/skillsFootball")) {
