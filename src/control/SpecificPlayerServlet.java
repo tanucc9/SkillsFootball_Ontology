@@ -38,29 +38,31 @@ public class SpecificPlayerServlet extends HttpServlet {
         SkillsFootballOntologyDAO sDao = new SkillsFootballOntologyDAO();
         LoggerSingleton l = LoggerSingleton.getInstance();
 
-        if (uriPlayer.contains("http://www.semanticweb.org/tanucc/ontologies/2022/4/skillsFootball")) {
-            if (uriPlayer.split("skillsFootball").length <= 1) {
-                RequestDispatcher dispatcher = request
-                        .getRequestDispatcher(response.encodeRedirectURL("./Index.jsp"));
-                dispatcher.forward(request, response);
-                return;
+        try {
+            if (uriPlayer.contains("http://www.semanticweb.org/tanucc/ontologies/2022/4/skillsFootball")) {
+                uriPlayer = sDao.doRetrieveURIDBPPlayer(uriPlayer.split("skillsFootball")[1]);
             }
-            uriPlayer = sDao.doRetrieveURIDBPPlayer(uriPlayer.split("skillsFootball")[1]);
+
+            uriPlayer = "<" + uriPlayer + ">";
+            SoccerPlayerBean player = sDao.doSpecificPlayer(uriPlayer);
+            ArrayList<SkillBean> skills = sDao.doSpecialSkillPlayer(uriPlayer);
+
+            String uriCurrClub = "<" + player.getFootballTeamBean().getUri() + ">";
+            ArrayList<SoccerPlayerBean> relatedPlayers = sDao.doRetrieveRelatedPlayers(uriCurrClub, uriPlayer);
+
+            request.setAttribute("player", player);
+            request.setAttribute("skills", skills);
+            request.setAttribute("relatedPlayers", relatedPlayers);
+            RequestDispatcher dispatcher = request
+                    .getRequestDispatcher(response.encodeRedirectURL("./SpecificPlayer.jsp"));
+            dispatcher.forward(request, response);
+        } catch (Exception e) {
+            // if has exception, then go to home without showing the exception.
+            RequestDispatcher dispatcher = request
+                    .getRequestDispatcher(response.encodeRedirectURL("./Index.jsp"));
+            dispatcher.forward(request, response);
+            return;
         }
-
-        uriPlayer = "<" + uriPlayer + ">";
-        SoccerPlayerBean player = sDao.doSpecificPlayer(uriPlayer);
-        ArrayList<SkillBean> skills = sDao.doSpecialSkillPlayer(uriPlayer);
-
-        String uriCurrClub = "<" + player.getFootballTeamBean().getUri() + ">";
-        ArrayList<SoccerPlayerBean> relatedPlayers = sDao.doRetrieveRelatedPlayers(uriCurrClub, uriPlayer);
-
-        request.setAttribute("player", player);
-        request.setAttribute("skills", skills);
-        request.setAttribute("relatedPlayers", relatedPlayers);
-        RequestDispatcher dispatcher = request
-                .getRequestDispatcher(response.encodeRedirectURL("./SpecificPlayer.jsp"));
-        dispatcher.forward(request, response);
     }
 
     /**
