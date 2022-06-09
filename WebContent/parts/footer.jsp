@@ -23,8 +23,8 @@
             <i class="fas fa-gem me-3"></i>Il team
           </h6>
           <p>
-            Siamo due ragazzi iscritti alla magistrale di informatica presso il Dipartimento di Informatica dell'Università degli studi di Salerno.
-            Questo progetto è stato realizzato per il corso di Intelligent Web
+            Siamo due ragazzi iscritti alla magistrale di informatica presso il Dipartimento di Informatica dell'Universit&agrave; degli studi di Salerno.
+            Questo progetto &egrave; stato realizzato per il corso di Intelligent Web
           </p>
         </div>
         <!-- Grid column -->
@@ -36,16 +36,16 @@
             Products
           </h6>
           <p>
-            <a href="#!" class="text-reset">Angular</a>
+            <a href="https://www.java.com/it/" class="text-reset" target="_blank">Java</a>
           </p>
           <p>
-            <a href="#!" class="text-reset">React</a>
+            <a href="https://tomcat.apache.org/" class="text-reset" target="_blank">Tomcat</a>
           </p>
           <p>
-            <a href="#!" class="text-reset">Vue</a>
+            <a href="https://jena.apache.org/" class="text-reset" target="_blank">Jena</a>
           </p>
           <p>
-            <a href="#!" class="text-reset">Laravel</a>
+            <a href="https://www.chartjs.org/" class="text-reset" target="_blank">ChartJS</a>
           </p>
         </div>
         <!-- Grid column -->
@@ -57,16 +57,16 @@
             Useful links
           </h6>
           <p>
-            <a href="#!" class="text-reset">Pricing</a>
+            <a href="https://www.dbpedia.org/" class="text-reset" target="_blank">DBPedia</a>
           </p>
           <p>
-            <a href="#!" class="text-reset">Settings</a>
+            <a href="https://dbpedia.org/ontology/SoccerPlayer" class="text-reset" target="_blank">SoccerPlayer</a>
           </p>
           <p>
-            <a href="#!" class="text-reset">Orders</a>
+            <a href="https://dbpedia.org/ontology/SoccerClub" class="text-reset" target="_blank">SoccerClub</a>
           </p>
           <p>
-            <a href="#!" class="text-reset">Help</a>
+            <a href="https://protege.stanford.edu/" class="text-reset" target="_blank">Prot&eacute;g&eacute;</a>
           </p>
         </div>
         <!-- Grid column -->
@@ -91,7 +91,7 @@
 
   <!-- Copyright -->
   <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-    © 2022 Copyright:
+    &copy; 2022 Copyright:
     <a class="text-reset fw-bold" href="https://github.com/tanucc9/SkillsFootball_Ontology">Skill Football Ontology </a>
   </div>
   <!-- Copyright -->

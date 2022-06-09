@@ -19,6 +19,7 @@
     String commento1 = dao.doRetrieveBallonDOr().get(0).getComment_BallonDOr();
     String commento2 = dao.doRetrieveBallonDOr().get(0).getLabel_BallonDOr();
 %>
+
 <div class="container" style="margin-top: 50px">
 <div class = row>
     <div class="column">
