@@ -248,20 +248,25 @@ public class SkillsFootballOntologyDAO {
                 "    SERVICE <http://dbpedia.org/sparql> {\n" +
                 "    " + resourcePlayer + " dbp:name ?name .\n" +
                 "     " + resourcePlayer + " dbp:currentclub ?currClubURI .\n" +
-                "      " + resourcePlayer + " rdfs:comment ?comment .\n" +
                 "    ?currClubURI rdfs:label ?currClub.\n" +
                 "    ?currClubURI dbo:thumbnail ?currClubThumbnail .\n" +
                 "    " + resourcePlayer + " dbo:position ?posURI .\n" +
                 "    ?posURI rdfs:label ?position .\n" +
-                "    FILTER(LANG(?currClub) = 'it')\n" +
+                "    FILTER(LANG(?currClub) = 'en')\n" +
                 "    FILTER(LANG(?position) = 'it')\n" +
-                "      FILTER(LANG(?comment) = 'it')\n" +
                 "      }\n" +
                 "    }\n" +
                 "    OPTIONAL\n" +
                 "    {\n" +
                 "      SERVICE <http://dbpedia.org/sparql> {\n" +
                 "      \t" + resourcePlayer + " dbo:thumbnail ?thumbnail .\n" +
+                "      }\n" +
+                "    }\n" +
+                "    OPTIONAL\n" +
+                "        {\n" +
+                "      SERVICE <http://dbpedia.org/sparql> {\n" +
+                "      \t" + resourcePlayer + " rdfs:comment ?comment .\n" +
+                "            FILTER((LANG(?comment) = 'it'))\n" +
                 "      }\n" +
                 "    }\n" +
                 "}\n" +
@@ -305,7 +310,11 @@ public class SkillsFootballOntologyDAO {
                 } else {
                     player.setThumbnail("no thumbnail");
                 }
-                player.setComment(qSolution.getLiteral("comment").getString());
+                if (qSolution.getLiteral("comment") != null) {
+                    player.setComment(qSolution.getLiteral("comment").getString());
+                } else {
+                    player.setComment("");
+                }
                 player.setFootballTeamBean(team);
             }
         }
