@@ -14,7 +14,7 @@ If you want to install the web app you have to:
 2. When the installation is finished, you have to start Jena Fuseki from cmd. Go to the directory where you installed it, open cmd, execute the command ```fuseki-server```;
 3. When it is started, you can access to control panel of Jena Fuseki from http://localhost:3030/#/;
 4. Next step is to create a dataset on Jena Fuseki called “SkillsFootball” and with the button "add data" you have to import the file “SkillsFootball_Ontology.ttl”;
-5. Now open the project on Intellij, execute the configuration to build the project and deploy it to Tomcat (you must have at least Tomcat 9 installed and running o your pc).
+5. Now open the project on Intellij, execute the configuration to build the project and deploy it to Tomcat (you must have at least Tomcat 9 installed and running on your pc).
 Now you can enjoy the project!
 
 ## Import ontology in Protégé
