@@ -24,7 +24,7 @@
 <div class = row>
     <div class="column">
         <h2><%=commento2%></h2>
-        <p><%=commento1 + "\n Questi gli unici due calciaotri presenti attualmente ad aver vinto questo prestigioso riconoscimento"%></p>
+        <p><%=commento1%></p>
     </div>
 </div>
 <div class="row">
